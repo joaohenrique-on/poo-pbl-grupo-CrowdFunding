@@ -1,0 +1,23 @@
+name: WorkflowProjeto
+
+on:
+    push:
+    pull_request:
+
+jobs:
+
+    testar:
+
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - uses: action/checkout@v4
+
+            - uses: action/setup-java@v4
+              with:
+                java-version: '17'
+                distribution: 'temurin'
+
+            - name: Executar Testes
+              run: mvn test
