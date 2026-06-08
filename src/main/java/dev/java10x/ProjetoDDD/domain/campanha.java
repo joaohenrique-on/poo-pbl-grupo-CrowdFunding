@@ -56,6 +56,18 @@ public class Campanha {
         }
     }
 
+    
+    public void receberdoacao(Doacao doacao) {
+        if (doacao == null) {
+            throw new IllegalArgumentException("A doação não pode ser nula");
+        }
+        if (!ativa) {
+            throw new IllegalStateException("Campanha inativa não pode receber doações");
+        }
+        this.doacoes.add(doacao);
+        this.totalRecebido += doacao.getValor();
+    }
+
     public void receber(String nomeDoador, double valor) {
         if (nomeDoador == null || nomeDoador.isBlank()) {
             throw new IllegalArgumentException("Nome do doador não pode ser vazio");
@@ -66,8 +78,7 @@ public class Campanha {
         if (!ativa) {
             throw new IllegalStateException("Campanha inativa não pode receber doações");
         } else {
-            Doacao doacao = new Doacao(nomeDoador, valor);
-            doacoes.add(doacao);
+            
             totalRecebido += valor;
         }
     }
@@ -95,29 +106,4 @@ public class Campanha {
     public String getId() {
         return campanhaId;
     }
-
-    public static class Doacao {
-
-        private final String doador;
-        private final double valor;
-        private final String dataHora;
-
-        public Doacao(String doador, double valor) {
-            this.doador = doador;
-            this.valor = valor;
-            this.dataHora = java.time.LocalDateTime.now().toString();
-        }
-
-        public String getDoador() {
-            return doador;
-        }
-
-        public double getValor() {
-            return valor;
-        }
-
-        public String getDataHora() {
-            return dataHora;
-        }
-    }
-}
+} 

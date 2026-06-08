@@ -12,16 +12,16 @@ public class CampanhaRepositoryMemoria
             new ArrayList<>();
 
     @Override
-public void salvar(Campanha campanha) {
+    public void salvar(Campanha campanha) {
 
-    Campanha existente = buscarPorId(campanha.getId());
+        Campanha existente = buscarPorId(campanha.getId());
 
-    if (existente != null) {
-        campanhas.remove(existente);
+        if (existente != null) {
+            campanhas.remove(existente);
+        }
+
+        campanhas.add(campanha);
     }
-
-    campanhas.add(campanha);
-}
 
     @Override
     public Campanha buscarPorId(String id) {
@@ -33,6 +33,7 @@ public void salvar(Campanha campanha) {
             }
 
         }
+
 
         return null;
     }
